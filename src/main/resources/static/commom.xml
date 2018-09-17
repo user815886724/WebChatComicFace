@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>通用配置信息</comment>
+
+    <!--微信的APPID-->
+    <entry key="Wechat.Appid">wxb0baa1a40e14d460</entry>
+
+    <!--微信的APPSerect-->
+    <entry key="Wechat.AppSerect">15c2ad698079950e76e42447a9e6555b</entry>
+</properties>
