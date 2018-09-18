@@ -8,4 +8,7 @@
 
     <!--微信的APPSerect-->
     <entry key="Wechat.AppSerect">15c2ad698079950e76e42447a9e6555b</entry>
+
+    <!--上传图片的路径-->
+    <entry key="ImagePath">/comicFace/upload/</entry>
 </properties>
