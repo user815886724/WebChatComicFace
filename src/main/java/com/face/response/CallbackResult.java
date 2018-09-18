@@ -1,5 +1,8 @@
 package com.face.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY )
 public class CallbackResult {
     //是否成功
     private boolean	success;

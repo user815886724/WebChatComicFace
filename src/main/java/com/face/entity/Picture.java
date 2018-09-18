@@ -13,11 +13,13 @@ public class Picture {
     public Picture() {
     }
 
-    public Picture(String id, String userId, String picPath, String resultPath, Date createTime, Date updateTime) {
+    public Picture(String id, String userId, String picPath, String resultPath, String absolutePath, String fileName, Date createTime, Date updateTime) {
         this.id = id;
         this.userId = userId;
         this.picPath = picPath;
         this.resultPath = resultPath;
+        this.absolutePath = absolutePath;
+        this.fileName = fileName;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
@@ -33,6 +35,12 @@ public class Picture {
 
     @Column(name = "resultPath")
     private String resultPath;
+
+    @Column(name = "absolutePath")
+    private String absolutePath;
+
+    @Column(name = "fileName")
+    private String fileName;
 
     @Column(name = "createTime")
     private Date createTime;
@@ -86,5 +94,21 @@ public class Picture {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getAbsolutePath() {
+        return absolutePath;
+    }
+
+    public void setAbsolutePath(String absolutePath) {
+        this.absolutePath = absolutePath;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

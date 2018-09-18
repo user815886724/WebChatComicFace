@@ -16,11 +16,16 @@ public class PictureServiceImpl implements PictureService {
     private PictureDao pictureDao;
 
     @Override
-    public void savePicture(String userId,String path) {
+    public void savePicture(String userId,String path,String absolutePath,String fileName) {
         String id = UUID.randomUUID().toString();
         Date createTime = new Date();
         Date updateTime = new Date();
-        Picture picture = new Picture(id,userId,path,null,createTime,updateTime);
+        Picture picture = new Picture(id,userId,path,null,absolutePath,fileName,createTime,updateTime);
         pictureDao.save(picture);
+    }
+
+    @Override
+    public Picture getPictureById(String pictureId) {
+        return pictureDao.getOne(pictureId);
     }
 }
