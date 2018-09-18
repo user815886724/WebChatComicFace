@@ -40,7 +40,7 @@ public class PicController {
     @Autowired
     private PictureService pictureService;
 
-    @RequestMapping("upload")
+    @RequestMapping("/upload")
     @ResponseBody
     public CallbackResult upload(@RequestParam("files")MultipartFile[] files,String logId){
         CallbackResult callbackResult = new CallbackResult(false);
