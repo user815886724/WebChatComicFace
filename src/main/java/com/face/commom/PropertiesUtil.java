@@ -1,7 +1,5 @@
 package com.face.commom;
 
-import org.springframework.context.ApplicationContext;
-
 import java.io.FileInputStream;
 import java.util.Properties;
 

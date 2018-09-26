@@ -11,4 +11,15 @@
 
     <!--上传图片的路径-->
     <entry key="ImagePath">/comicFace/upload/</entry>
+
+    <!--百度人脸识别APP_ID-->
+    <entry key="Face_APP_ID">11419428</entry>
+
+    <!--百度人脸识别API_KEY-->
+    <entry key="Face_API_KEY">z2yLENMLZhb36DcILorb64gO</entry>
+
+    <!--百度人脸识别SECRET_KEY-->
+    <entry key="Face_SECRET_KEY">LTREsidBK1tyOvGA4Gf4dOPphhfDwmc2</entry>
+
+    <!--百度文字识别APP_ID-->
 </properties>
