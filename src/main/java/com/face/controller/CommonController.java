@@ -10,8 +10,12 @@ public class CommonController {
 
     @RequestMapping("/404")
     public String error404(){
-        return "commons/404";
+        return "404";
     }
 
+    @RequestMapping("")
+    public String index(){
+        return "index";
+    }
 
 }
