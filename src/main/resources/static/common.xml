@@ -22,4 +22,12 @@
     <entry key="Face_SECRET_KEY">LTREsidBK1tyOvGA4Gf4dOPphhfDwmc2</entry>
 
     <!--百度文字识别APP_ID-->
+    <entry key="Word_APP_ID">14223464</entry>
+
+    <!--百度文字识别API_KEY-->
+    <entry key="Word_APP_KEY">qYsu9owNq8HGEGrKBbg5mNSA</entry>
+
+    <!--百度文字识别SECRET_KEY-->
+    <entry key="Word_SECRET_KEY">ACFiKcgZGCTgtfS2kZcjB1InNjka7q8X</entry>
+
 </properties>

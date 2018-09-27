@@ -24,6 +24,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -47,50 +49,20 @@ public class PicController {
     @ResponseBody
     public CallbackResult upload(@RequestParam("files")MultipartFile[] files,String logId){
         CallbackResult result = new CallbackResult(false);
-
-        //得到用户的个人信息
-        if(StringUtils.isEmpty(logId)){
-            result.setMessage("用户未登录！请登录！");
+        String pictureId = "";
+        try{
+            String userId = userService.checkUserIdByLogId(logId);
+            pictureId = pictureService.upload(userId,files);
+        }catch (Exception e){
+            e.printStackTrace();
+            result.setMessage(e.getMessage());
             return result;
         }
-        String userId = userLogService.getUserIdById(logId);
-        if(StringUtils.isEmpty(logId)){
-            result.setMessage("用户登录日志信息出现异常！");
-            return result;
-        }
-        User user = userService.getUserById(userId);
-        if(user == null){
-            result.setMessage("用户信息出现异常！");
-            return result;
-        }
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss");
-
-
-        log.info("开始上传");
-        //多文件上传
-        if(files != null && files.length >= 1){
-            try{
-                String fileName = files[0].getOriginalFilename();
-                //判断是否有文件(实际生产中要判断是否是音频文件)
-                if(StringUtils.isNoneBlank(fileName)) {
-                    //创建输出文件夹对象
-                    String filePath = user.getId()+File.separator + simpleDateFormat.format(new Date());
-                    String fileObject = UUID.randomUUID().toString() +"."+ FileUtil.getFileType(fileName);
-                    File outFile = new File(PropertiesUtil.getProperties("ImagePath") + filePath + File.separator + fileObject);
-                    //拷贝文件到输出文件对象
-                    FileUtils.copyInputStreamToFile(files[0].getInputStream(), outFile);
-                    pictureService.savePicture(userId,filePath + File.separator + fileObject,PropertiesUtil.getProperties("ImagePath") + filePath + File.separator + fileObject,fileName);
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-                result.setMessage(e.getMessage());
-                return result;
-            }finally {
-                result.setSuccess(true);
-                result.setMessage("上传成功！");
-            }
-        }
+        Map param = new HashMap();
+        param.put("pictureId",pictureId);
+        result.setSuccess(true);
+        result.setDetails(param);
+        result.setMessage("上传成功！");
         return result;
     }
 
@@ -98,13 +70,6 @@ public class PicController {
     @RequestMapping("/download")
     @ResponseBody
     public ResponseEntity<byte[]> download(@RequestParam("pictureId") String pictureId) throws IOException{
-        Picture picture = pictureService.getPictureById(pictureId);
-        File file = new File(picture.getAbsolutePath());
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentDispositionFormData("attachment",picture.getFileName());
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),
-                headers, HttpStatus.CREATED);
+        return pictureService.download(pictureId);
     }
-
 }

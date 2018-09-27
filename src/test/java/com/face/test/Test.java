@@ -1,6 +1,7 @@
 package com.face.test;
 
 import com.baidu.aip.ocr.AipOcr;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.imageio.stream.FileImageInputStream;
@@ -48,8 +49,14 @@ public class Test {
         // 参数为本地图片二进制数组
         byte[] file = readImageFile(image);
         JSONObject res = client.basicAccurateGeneral(file, options);
+        JSONArray jsonArray = res.getJSONArray("words_result");
+        String result = "";
+        for(int i = 0;i < jsonArray.length();i++){
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            result += jsonObject.getString("words") + "\n";
+        }
         System.out.println(res.toString(2));
-
+        System.out.println(result);
     }
 
     private static byte[] readImageFile(String path){

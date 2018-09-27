@@ -17,4 +17,6 @@ public interface UserService {
     User getUserById(String id);
 
     void saveOrUpdateUser(User user);
+
+    String checkUserIdByLogId(String logId)throws Exception;
 }
