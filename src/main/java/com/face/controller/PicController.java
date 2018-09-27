@@ -1,32 +1,19 @@
 package com.face.controller;
 
-import com.face.commom.PropertiesUtil;
-import com.face.entity.Picture;
-import com.face.entity.User;
 import com.face.response.CallbackResult;
 import com.face.service.PictureService;
 import com.face.service.UserLogService;
 import com.face.service.UserService;
-import com.face.utils.FileUtil;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 
 @RestController

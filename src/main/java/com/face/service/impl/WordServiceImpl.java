@@ -4,6 +4,7 @@ import com.baidu.aip.ocr.AipOcr;
 import com.face.commom.PropertiesUtil;
 import com.face.dao.PictureDao;
 import com.face.dao.WordDao;
+import com.face.entity.Picture;
 import com.face.entity.Word;
 import com.face.service.WordService;
 import com.face.utils.FileUtil;
@@ -46,9 +47,11 @@ public class WordServiceImpl implements WordService{
     private PictureDao pictureDao;
 
     @Override
-    public String recognize(String pictureId,String userId)throws Exception{
+    public String recognize(String pictureId)throws Exception{
         //去查路径
-        String path = pictureDao.getOne(pictureId).getAbsolutePath();
+        Picture picture = pictureDao.getOne(pictureId);
+        String path = picture.getAbsolutePath();
+        String userId = picture.getUserId();
         AipOcr client = new AipOcr(PropertiesUtil.getProperties(APP_ID), PropertiesUtil.getProperties(APP_KEY), PropertiesUtil.getProperties(SECRET_KEY));
 
         // 可选：设置网络连接参数
