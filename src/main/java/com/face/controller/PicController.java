@@ -96,6 +96,7 @@ public class PicController {
 
 
     @RequestMapping("/download")
+    @ResponseBody
     public ResponseEntity<byte[]> download(@RequestParam("pictureId") String pictureId) throws IOException{
         Picture picture = pictureService.getPictureById(pictureId);
         File file = new File(picture.getAbsolutePath());
