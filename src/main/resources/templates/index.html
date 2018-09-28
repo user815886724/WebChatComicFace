@@ -5,7 +5,6 @@
 
 <style type="text/css">
 body {
-	background-color:#000044;
 	/*background:url(images/bg.jpg) repeat-x;*/
 	margin:0px;
 	overflow:hidden;
@@ -14,6 +13,15 @@ a {
 	color:#0078ff;
 }
 * { touch-action: pan-y; }
+img{
+    height:100%;
+    width: 100%;
+    position:absolute;
+    object-fit: cover;
+}
+canvas{
+    position: absolute;
+}
 </style>
 
 </head>
@@ -46,8 +54,22 @@ particleImage.src = '/server/images/ParticleSmoke.png';
 
 
 function init() {
-
+    var html = "<div>" +
+        "    <div>" +
+        "        <img src='/server/images/index/bg.jpg'/>" +
+        "    </div>" +
+        "    <div>" +
+        "        <img src='/server/images/index/batman3.png'/>" +
+        "    </div>" +
+        "    <div>" +
+        "        <img src='/server/images/index/batman2.png' />" +
+        "    </div>" +
+        "    <div>" +
+        "        <img src='/server/images/index/batman1.png' />" +
+        "    </div>" +
+        "</div>"
 	container = document.createElement('div');
+    container.innerHTML = html;
 	document.body.appendChild(container);
 
 	camera = new THREE.PerspectiveCamera( 75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
@@ -75,7 +97,6 @@ function init() {
 	document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 	document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 	setInterval( loop, 1000 / 60 );
-	
 }
 
 function onDocumentMouseMove( event ) {
@@ -124,6 +145,7 @@ for(var i = 0; i<particles.length; i++)
 	renderer.render( scene, camera );
 }
 </script>
+
 
 </body>
 </html>

@@ -11,11 +11,13 @@ import com.face.utils.FileUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+@Service
 public class WordServiceImpl implements WordService{
 
     /**
