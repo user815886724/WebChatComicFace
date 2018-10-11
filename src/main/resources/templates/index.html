@@ -27,6 +27,7 @@ canvas{
 </head>
 <body onLoad="init()">
 
+<link rel="stylesheet" th:href="@{/server/css/csshake.css}">
 <script type="text/javascript" th:src="@{/server/js/ThreeCanvas.js}"></script>
 <script type="text/javascript" th:src="@{/server/js/Snow.js}"></script>
 <script type="text/javascript">
@@ -58,11 +59,11 @@ function init() {
         "    <div>" +
         "        <img src='/server/images/index/bg.jpg'/>" +
         "    </div>" +
-        "    <div>" +
-        "        <img src='/server/images/index/batman3.png'/>" +
+        "    <div class='shake shake-constant shake-little' style='position: absolute;width: 100%;height: 100%;animation-duration: 17s'>" +
+        "        <img src='/server/images/index/batman2.png' />" +
         "    </div>" +
         "    <div>" +
-        "        <img src='/server/images/index/batman2.png' />" +
+        "        <img src='/server/images/index/batman3.png'/>" +
         "    </div>" +
         "    <div>" +
         "        <img src='/server/images/index/batman1.png' />" +

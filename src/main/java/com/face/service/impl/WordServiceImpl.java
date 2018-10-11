@@ -6,6 +6,7 @@ import com.face.dao.PictureDao;
 import com.face.dao.WordDao;
 import com.face.entity.Picture;
 import com.face.entity.Word;
+import com.face.model.WordModel;
 import com.face.service.WordService;
 import com.face.utils.FileUtil;
 import org.json.JSONArray;
@@ -13,12 +14,19 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class WordServiceImpl implements WordService{
+
+    /**
+     * 百度文字识别的服务器配置
+     */
+    private static String APP_ID = "Word_APP_ID";
+
+    private static String APP_KEY = "Word_APP_KEY";
+
+    private static String SECRET_KEY = "Word_SECRET_KEY";
 
     /**
      * 百度文字识别的配置字段
@@ -32,14 +40,7 @@ public class WordServiceImpl implements WordService{
     private static String PROBABILITY = "probability";
 
 
-    /**
-     * 百度的服务器配置
-     */
-    private static String APP_ID = "Word_APP_ID";
 
-    private static String APP_KEY = "Word_APP_KEY";
-
-    private static String SECRET_KEY = "Word_SECRET_KEY";
 
 
     @Autowired
@@ -54,6 +55,8 @@ public class WordServiceImpl implements WordService{
         Picture picture = pictureDao.getOne(pictureId);
         String path = picture.getAbsolutePath();
         String userId = picture.getUserId();
+
+        //连接文字识别客户端
         AipOcr client = new AipOcr(PropertiesUtil.getProperties(APP_ID), PropertiesUtil.getProperties(APP_KEY), PropertiesUtil.getProperties(SECRET_KEY));
 
         // 可选：设置网络连接参数
@@ -82,5 +85,20 @@ public class WordServiceImpl implements WordService{
             result += jsonObject.getString(WORDS) + "\n";
         }
         return result;
+    }
+
+    @Override
+    public List<WordModel> getWordList(String userId) {
+        List<Word> words = wordDao.findUserByUserId(userId);
+        List<WordModel> wordModels = new ArrayList<>();
+        for(Word word : words){
+            WordModel wordModel = new WordModel();
+            Picture picture = pictureDao.getOne(word.getPictureId());
+            wordModel.setPictureUrl(picture.getPicPath());
+            wordModel.setResult(word.getResult());
+            wordModel.setWordId(word.getId());
+            wordModels.add(wordModel);
+        }
+        return wordModels;
     }
 }
