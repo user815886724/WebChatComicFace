@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/server/layui/css/layui.css" media="all">
+
+    <script type="text/javascript" src="/server/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/server/layui/layui.js"></script>
+    <script type="text/javascript" src="/server/js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="/server/js/create_data.js"></script>
+    <style>
+        .right{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <form class="layui-form" action="" id="dataShape" style="margin: 10px">
+        <div class="layui-form-item">
+            <label class="layui-form-label">结果类型：</label>
+            <div class="layui-input-block">
+                <select id="faceShape" lay-verify="required" name="shapeId">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择图片：</label>
+            <div>
+                <button type="button" class="layui-btn" id="faceImage">
+                    <i class="layui-icon">&#xe67c;</i>上传图片
+                </button>
+            </div>
+        </div>
+        <div class="layui-form-item" id="image">
+            <label class="layui-form-label">图片预览：</label>
+            <div class="layui-upload-img">
+                <img src="" id="faceShow" style="width: 200px;">
+            </div>
+        </div>
+    </form>
+    <div class="layui-footer" style="display: none">
+        <div class="layui-input-block right">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" id="submit">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</body>
+</html>

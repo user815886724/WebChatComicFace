@@ -1,13 +1,18 @@
 package com.face.learn.bias.classification;
 
+import com.face.learn.Bayes;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
 import java.util.ArrayList;
 
 public class TestBayes {
     public static void main(String[] args)throws IOException{
-        ArrayList<ArrayList<String>> predictDatas = readData("C:\\Users\\PabloWayne\\Desktop\\text.txt");
-        ArrayList<String> testData = readTest("C:\\Users\\PabloWayne\\Desktop\\test.txt");
-        System.out.println(Bayes.predictClass(predictDatas,testData));
+        ArrayList<ArrayList<String>> predictDatas = readData("C:\\Users\\PabloWayne\\Desktop\\predict.txt");
+        ArrayList<ArrayList<String>> testData = readData("C:\\Users\\PabloWayne\\Desktop\\test.txt");
+        for(ArrayList<String> test : testData){
+            System.out.println(Bayes.predictClass(predictDatas,test));
+        }
     }
 
     private static ArrayList<String> readTest(String path)throws IOException{
@@ -31,11 +36,13 @@ public class TestBayes {
         while ((tmpLine = reader.readLine()) != null){
             ArrayList<String> tmpList = new ArrayList<>();
             for(String tmp : tmpLine.split(" ")){
-                if( tmp != " "){
+                if(StringUtils.isNotBlank(tmp)){
                     tmpList.add(tmp);
                 }
             }
-            results.add(tmpList);
+            if(tmpList.size() > 0){
+                results.add(tmpList);
+            }
         }
         reader.close();
         return results;

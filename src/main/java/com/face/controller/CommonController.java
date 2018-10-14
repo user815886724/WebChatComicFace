@@ -16,4 +16,17 @@ public class CommonController {
         return "index";
     }
 
+    @RequestMapping("/create_face_data")
+    public String create(){
+        return "create_data";
+    }
+
+    @RequestMapping("/face_data_list")
+    public String list(){
+        return "face_data_list";
+    }
+
+    @RequestMapping("/create_face_shape")
+    public String createFaceShape(){return "create_face_shape";}
+
 }

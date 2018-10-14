@@ -48,7 +48,7 @@ public class PictureServiceImpl implements PictureService {
     @Override
     public String upload(String userId, MultipartFile[] files) throws Exception {
         String pictureId = "";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM");
         logger.info("开始上传");
         //文件上传
         if(files != null && files.length >= 1){

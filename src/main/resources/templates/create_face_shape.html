@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/server/layui/css/layui.css" media="all">
+
+    <script type="text/javascript" src="/server/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/server/layui/layui.js"></script>
+    <script type="text/javascript" src="/server/js/create_face_shape.js"></script>
+    <style>
+        .right{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <form class="layui-form" action="" style="margin: 10px">
+        <div class="layui-form-item">
+            <label class="layui-form-label">添加类型</label>
+            <div class="layui-input-block">
+                <input type="text" name="shapeName" required  lay-verify="required" placeholder="请输入类型" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block right">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

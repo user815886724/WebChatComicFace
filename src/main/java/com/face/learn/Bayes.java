@@ -1,4 +1,4 @@
-package com.face.learn.bias.classification;
+package com.face.learn;
 
 import com.face.utils.DecimalCalculate;
 

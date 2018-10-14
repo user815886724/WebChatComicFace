@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/server/layui/css/layui.css" media="all">
+
+    <script type="text/javascript" src="/server/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/server/layui/layui.js"></script>
+    <title>分类训练集</title>
+    <style>
+        .button{
+            margin: 10px auto;
+        }
+        button{
+            margin-left: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="button">
+        <button class="layui-btn" onclick="createData()">
+            <i class="layui-icon">&#xe608;</i> 添加训练数据
+        </button>
+        <button class="layui-btn layui-btn-normal" onclick="createFaceShape()">
+            <i class="layui-icon">&#xe608;</i> 添加脸型
+        </button>
+    </div>
+    <table class="layui-table" style="margin: 2px">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>眼角和颧骨的横比</th>
+                <th>颧骨到下巴底部的横纵比</th>
+                <th>颧骨到下巴底部与下颚骨到下巴底部的纵比</th>
+                <th>脸型</th>
+                <th>创建时间</th>
+                <th>更新时间</th>
+            </tr>
+        </thead>
+        <tbody> </tbody>
+    </table>
+    <div id="laypage" style="text-align: right"></div>
+</body>
+<script>
+    var curr = 1;
+    var size = 10;
+    var count = 0;
+    layui.use(['table','laypage'], function(){
+        var table = layui.table;
+        var laypage = layui.laypage;
+        table.render({
+            elem: '#demo',
+            height: 312
+        });
+        init(curr,size);
+    });
+
+    function initTable(curr,size) {
+        $.ajax({
+            url : "/face/getFaceDataList",
+            type : "GET",
+            dataType:"JSON",
+            data : {
+              page : curr - 1,
+              size : size
+            },
+            success : function (resp) {
+                $(".layui-table tbody").html("");
+                if(resp.numberOfElements > 0){
+                    $(resp.datas).each(function (i,item) {
+                        var html = "<tr>" +
+                            "<td>"+item.eyeCheekbonesTRatio+"</td>" +
+                            "<td>"+item.cheekbonesChinTvRatio+"</td>" +
+                            "<td>"+item.cheekbonesJawboneVRatio+"</td>" +
+                            "<td>"+item.faceShape+"</td>" +
+                            "<td>"+dateFormat(item.createTime)+"</td>" +
+                            "<td>"+dateFormat(item.updateTime)+"</td>" +
+                            "</tr>";
+                        $(".layui-table tbody").append(html);
+                    })
+                }
+            }
+        });
+    }
+
+    function dateFormat(time){
+        var date = new Date(time);
+        var year = date.getFullYear();
+        var month = date.getMonth()+1; //js从0开始取
+        var day = date.getDate();
+        var hour = date.getHours();
+        var minutes = date.getMinutes();
+        var second = date.getSeconds();
+        return year+"-"+month+"-"+day+" "+hour+":"+minutes+":"+second;
+    }
+    function renderLaypage(curr,size){
+        layui.use('laypage', function(){
+            var laypage = layui.laypage;//高版本建议把括号去掉，有的低版本，需要加()
+            laypage.render({
+                elem: 'laypage',
+                count: count, //数据总数，从服务端得到
+                limit : size,
+                curr : curr,
+                jump : function (object,first) {
+                   curr = object.curr;
+                   initTable(curr,size);
+                }
+            });
+        });
+    }
+    function init(){
+        $.ajax({
+            type : "GET",
+            url : "/face/getFaceDataCount",
+            success: function (resp) {
+                count = resp;
+                curr = 1;
+                initTable(curr,size);
+                renderLaypage(curr,size);
+            }
+        })
+    }
+    function createFaceShape(){
+        layer.open({
+            type : 2,
+            area: ['500px','170px'],
+            content : "/create_face_shape",
+            title : "新增脸型"
+        })
+    }
+    function createData(){
+        layer.open({
+            type : 2,
+            area: ['600px','500px'],
+            content : "/create_face_data",
+            title : "新增脸型训练数据",
+            btn: ['确定','关闭'],
+            yes: function(index){
+                window["layui-layer-iframe" + index].clickSubmit()
+            },
+            cancel: function(){
+                //右上角关闭回调
+            }
+        })
+    }
+</script>
+</html>
