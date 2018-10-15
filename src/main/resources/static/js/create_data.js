@@ -11,6 +11,7 @@ layui.use(['layer', 'form','upload'], function(){
         auto : false,//关闭自动上传
         field : "files",
         multiple : "false",
+        size : "",
         bindAction : "#submit",//指向一个按钮触发上传
         choose : function(obj){
             var files = obj.pushFile();
@@ -40,7 +41,7 @@ layui.use(['layer', 'form','upload'], function(){
 
 function getOptions() {
     $.ajax({
-        url : "http://localhost:8080/face/getFaceShapeList",
+        url : "/face/getFaceShapeList",
         type : "GET",
         success : function (resp) {
             if(resp.success){
