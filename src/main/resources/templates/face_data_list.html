@@ -14,6 +14,10 @@
         button{
             margin-left: 2px;
         }
+        .layui-layer-btn .layui-layer-btn0{
+            border-color : rgb(3, 151, 136) !important;
+            background-color: rgb(3, 151, 136) !important;
+        }
     </style>
 </head>
 <body>
@@ -39,6 +43,7 @@
                 <th>脸型</th>
                 <th>创建时间</th>
                 <th>更新时间</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody> </tbody>
@@ -79,6 +84,7 @@
                             "<td>"+item.faceShape+"</td>" +
                             "<td>"+dateFormat(item.createTime)+"</td>" +
                             "<td>"+dateFormat(item.updateTime)+"</td>" +
+                            "<td><button class='layui-btn layui-btn-primary layui-btn-sm' onclick='deleteData(\""+item.id+"\")'><i class='layui-icon'>&#xe640;</i></button></td>" +
                             "</tr>";
                         $(".layui-table tbody").append(html);
                     })
@@ -129,7 +135,7 @@
             type : 2,
             area: ['500px','170px'],
             content : "/create_face_shape",
-            title : "新增脸型"
+            title : ["新增脸型","background-color:rgb(3, 151, 136);color:white;"]
         })
     }
     function createData(){
@@ -137,7 +143,7 @@
             type : 2,
             area: ['600px','500px'],
             content : "/create_face_data",
-            title : "新增脸型训练数据",
+            title : ["新增脸型训练数据","background-color:rgb(3, 151, 136);color:white;"],
             btn: ['确定','关闭'],
             yes: function(index){
                 window["layui-layer-iframe" + index].clickSubmit()
@@ -145,6 +151,27 @@
             cancel: function(){
                 //右上角关闭回调
             }
+        })
+    }
+    function deleteData(id) {
+        layer.confirm("是否删除该数据？",{icon : 3, title : '提示',btn : ['确定','取消']},function (index) {
+            $.ajax({
+                type : "POST",
+                data : {
+                    id : id
+                },
+                url : "/face/deleteFaceData",
+                success : function (resp) {
+                    if(resp.success){
+                        initTable(curr,size);
+                        layer.close(index);
+                    }else{
+                        layer.msg(resp);
+                    }
+                }
+            })
+        },function () {
+
         })
     }
 </script>

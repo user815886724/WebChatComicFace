@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/word/")
+    @RequestMapping(value = "/word/")
 public class WordController {
 
     @Autowired

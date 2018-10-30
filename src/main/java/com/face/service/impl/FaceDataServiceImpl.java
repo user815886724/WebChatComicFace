@@ -43,4 +43,9 @@ public class FaceDataServiceImpl implements FaceDataService{
     public long getFaceDataCount() {
         return faceDataDao.count();
     }
+
+    @Override
+    public void deleteFaceData(String id) {
+        faceDataDao.deleteById(id);
+    }
 }

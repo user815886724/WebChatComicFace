@@ -18,7 +18,12 @@ public class UrlUtils {
      *            发送请求的URL
      * @return URL 所代表远程资源的响应结果
      */
-    public static String sendGet(String url) {
+    public static String sendGet(String url){
+        return sendGet(url,"UTF-8");
+    }
+
+
+    public static String sendGet(String url,String charset) {
         StringBuilder result = new StringBuilder();
         BufferedReader in = null;
         try {
@@ -35,18 +40,13 @@ public class UrlUtils {
             // 建立实际的连接
             connection.connect();
             // 遍历所有的响应头字段
-            // for (String key : map.keySet()) {
-            // System.out.println(key + "--->" + map.get(key));
-            // }
-            // 定义 BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream(), "utf-8"));
+                    connection.getInputStream(), charset));
             String line;
             while ((line = in.readLine()) != null) {
                 result.append(line);
             }
         } catch (Exception e) {
-//			System.out.println("发送GET请求出现异常！" + e);
             result = new StringBuilder("{\"resCode\":\"1\",\"errCode\":\"1001\",\"resData\":\"\"}");
             e.printStackTrace();
             log.error("远程服务未开启", e);
@@ -107,12 +107,10 @@ public class UrlUtils {
                 result.append(line);
             }
         } catch (Exception e) {
-//			System.out.println("发送 POST 请求出现异常！" + e);
             result = new StringBuilder("{\"resCode\":\"1\",\"errCode\":\"1001\",\"resData\":\"\"}");
             e.printStackTrace();
             log.error("远程服务未开启", e);
         }
-        // 使用finally块来关闭输出流、输入流
         finally {
             try {
                 if (out != null) {

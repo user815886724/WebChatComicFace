@@ -129,4 +129,13 @@ public class FaceController {
     public long getFaceDataCount(){
         return faceDataService.getFaceDataCount();
     }
+
+    @PostMapping("/deleteFaceData")
+    @ResponseBody
+    public CallbackResult deleteFaceData(String id){
+        CallbackResult callbackResult = new CallbackResult(true);
+        faceDataService.deleteFaceData(id);
+        callbackResult.setDetails("删除成功！");
+        return callbackResult;
+    }
 }
