@@ -9,7 +9,8 @@
     <title>分类训练集</title>
     <style>
         .button{
-            margin: 10px auto;
+            margin: 10px 0;
+            text-align: right;
         }
         button{
             margin-left: 2px;
@@ -18,37 +19,64 @@
             border-color : rgb(3, 151, 136) !important;
             background-color: rgb(3, 151, 136) !important;
         }
+        .site-block{
+            padding : 20px;
+            border : 1px solid #eee;
+            margin: 30px;
+        }
+        .site-title fieldset legend{
+            margin-left: 20px;
+            padding: 0 10px;
+            font-size: 22px;
+            font-weight: 300;
+        }
+        .site-title fieldset {
+            border: none;
+            padding: 0;
+            border-top: 1px solid #eee;
+            margin: 30px;
+        }
     </style>
 </head>
 <body>
-    <div class="button">
-        <button class="layui-btn" onclick="createData()">
-            <i class="layui-icon">&#xe608;</i> 添加训练数据
-        </button>
-        <button class="layui-btn layui-btn-normal" onclick="createFaceShape()">
-            <i class="layui-icon">&#xe608;</i> 添加脸型
-        </button>
+    <div class="site-title">
+        <fieldset>
+            <legend>
+                <a name="use">脸型数据分析</a>
+            </legend>
+        </fieldset>
     </div>
-    <table class="layui-table" style="margin: 2px">
-        <colgroup>
-            <col width="150">
-            <col width="200">
-            <col>
-        </colgroup>
-        <thead>
-            <tr>
-                <th>眼角和颧骨的横比</th>
-                <th>颧骨到下巴底部的横纵比</th>
-                <th>颧骨到下巴底部与下颚骨到下巴底部的纵比</th>
-                <th>脸型</th>
-                <th>创建时间</th>
-                <th>更新时间</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody> </tbody>
-    </table>
-    <div id="laypage" style="text-align: right"></div>
+
+    <div class="site-text site-block">
+        <div class="button">
+            <button class="layui-btn" onclick="createData()">
+                <i class="layui-icon">&#xe608;</i> 添加训练数据
+            </button>
+            <button class="layui-btn layui-btn-normal" onclick="createFaceShape()">
+                <i class="layui-icon">&#xe608;</i> 添加脸型
+            </button>
+        </div>
+        <table class="layui-table" style="margin: 2px">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>眼角和颧骨的横比</th>
+                    <th>颧骨到下巴底部的横纵比</th>
+                    <th>颧骨到下巴底部与下颚骨到下巴底部的纵比</th>
+                    <th>脸型</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="laypage" style="text-align: right;margin-top: inherit"></div>
+    </div>
 </body>
 <script>
     var curr = 1;

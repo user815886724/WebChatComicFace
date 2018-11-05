@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分析主界面</title>
+
+    <link rel="stylesheet" href="/server/layui/css/layui.css" media="all">
+
+    <script type="text/javascript" src="/server/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/server/layui/layui.js"></script>
+    <script type="text/javascript" src="/server/js/main.js"></script>
+</head>
+<body>
+    <ul class="layui-nav layui-nav-tree layui-nav-side" lay-filter="menu">
+        <li class="layui-nav-item layui-this">
+            <a href="javascript:;" data_url="/">
+                <i class='layui-icon' style="margin-right: 5px">&#xe603;</i>首页
+            </a>
+        </li>
+        <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">股票分析</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;" data_url="/shares_list">股票种类</a></dd>
+                <dd><a href="javascript:;" data_url="/add_shares">添加股票</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;" data_url="/face_data_list">脸型分析</a>
+        </li>
+    </ul>
+    <div class="layui-body">
+        <iframe src="/" style="height: 100%;width: 100%;"></iframe>
+    </div>
+</body>
+</html>

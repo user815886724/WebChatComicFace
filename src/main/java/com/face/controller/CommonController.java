@@ -29,4 +29,15 @@ public class CommonController {
     @RequestMapping("/create_face_shape")
     public String createFaceShape(){return "create_face_shape";}
 
+    @RequestMapping("/shares_list")
+    public String sharesList(){return "shares_list";}
+
+    @RequestMapping("/main")
+    public String main(){return "main";}
+
+    @RequestMapping("/add_shares")
+    public String addShares(){return "add_shares";}
+
+    @RequestMapping("/shares_detail")
+    public String sharesDetail(){return "shares_detail";}
 }

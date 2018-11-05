@@ -26,6 +26,9 @@ public class Shares {
     @Column(name = "code")
     private String code;
 
+    @Column(name = "code_name")
+    private String codeName;
+
     @OneToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @JoinColumn(name = "share_stat_id")
     private ShareStat stat;
@@ -71,6 +74,13 @@ public class Shares {
     }
 
     public Shares() {
-        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getCodeName() {
+        return codeName;
+    }
+
+    public void setCodeName(String codeName) {
+        this.codeName = codeName;
     }
 }

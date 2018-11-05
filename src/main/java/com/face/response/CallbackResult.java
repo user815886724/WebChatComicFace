@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY )
 public class CallbackResult {
     //是否成功
-    private boolean	success;
+    private boolean success;
     //返回消息
-    private String	message;
+    private String  message;
     //出错处理所需的附属对象
-    private Object	details;
+    private Object  details;
 
     public CallbackResult() {
     }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>股票信息</title>
+    <style>
+        .site-block{
+            padding : 20px;
+            border : 1px solid #eee;
+            margin: 30px;
+        }
+        .site-title fieldset legend{
+            margin-left: 20px;
+            padding: 0 10px;
+            font-size: 22px;
+            font-weight: 300;
+        }
+        .site-title fieldset {
+            border: none;
+            padding: 0;
+            border-top: 1px solid #eee;
+            margin: 30px;
+        }
+        .layui-table td, .layui-table th{
+            text-align: center !important;
+        }
+    </style>
+    <link rel="stylesheet" href="/server/layui/css/layui.css" media="all">
+
+
+    <script type="text/javascript" src="/server/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/server/layui/layui.js"></script>
+    <script type="text/javascript" src="/server/js/shares_list.js"></script>
+</head>
+<body>
+    <div class="site-title">
+        <fieldset>
+            <legend>
+                <a name="use">股票数据</a>
+            </legend>
+        </fieldset>
+    </div>
+    <div class="site-text site-block">
+    <table class="layui-table" style="margin: 2px">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>股票代码</th>
+                <th>股票名称</th>
+                <th>拥有的数据时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div id="laypage" style="text-align: right;margin-top: inherit"></div>
+    </div>
+</body>
+</html>

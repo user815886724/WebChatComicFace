@@ -57,7 +57,14 @@ public class Share {
     @Column(name = "turnover_rate")
     private String turnoverRate;
 
-    public Share(String time, Double openPrice, Double closePrice, Double riseFallAmount, String riseFallRange, Double lowest, Double highest, Double volume, Double turnover, String turnoverRate) {
+    //股票代码
+    @Column(name = "share_code")
+    private String shareCode;
+
+    @Column(name = "shares_id")
+    private String sharesId;
+
+    public Share(String time, Double openPrice, Double closePrice, Double riseFallAmount, String riseFallRange, Double lowest, Double highest, Double volume, Double turnover, String turnoverRate,String shareCode) {
         this.id = UUID.randomUUID().toString();
         this.time = time;
         this.openPrice = openPrice;
@@ -69,6 +76,7 @@ public class Share {
         this.volume = volume;
         this.turnover = turnover;
         this.turnoverRate = turnoverRate;
+        this.shareCode = shareCode;
     }
 
     public String getId() {
@@ -162,5 +170,19 @@ public class Share {
         this.turnover = turnover;
     }
 
+    public String getShareCode() {
+        return shareCode;
+    }
 
+    public void setShareCode(String shareCode) {
+        this.shareCode = shareCode;
+    }
+
+    public String getSharesId() {
+        return sharesId;
+    }
+
+    public void setSharesId(String sharesId) {
+        this.sharesId = sharesId;
+    }
 }

@@ -9,6 +9,7 @@ import net.sf.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author huangwh
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class SharesUtil {
 
-    private static String url = "http://q.stock.sohu.com/hisHq?code=@code&start=@start&end=@end&stat=1&order=D&period=d&callback=historySearchHandler&rt=jsonp";
+
 
     private static String charset = "GB2312";
 
@@ -39,9 +40,13 @@ public class SharesUtil {
     }
 
     public Shares getSharesEntity(){
+        String url = "http://q.stock.sohu.com/hisHq?code=@code&start=@start&end=@end&stat=1&order=D&period=d&callback=historySearchHandler&rt=jsonp";
+
         Shares shares = new Shares();
-        url = url.replace("@code","cn_"+code)
-                .replace("@start",start).replace("@end",end);
+        shares.setId(UUID.randomUUID().toString());
+        url = url.replace("@code","cn_"+code);
+        url = url.replace("@start",start);
+        url = url.replace("@end",end);
         //获取数据
         String result = UrlUtils.sendGet(url,charset);
         //过滤多余数据，提取JSON对象
@@ -59,7 +64,7 @@ public class SharesUtil {
                 Share share = new Share(sharesArray.getString(0),
                         sharesArray.getDouble(1),sharesArray.getDouble(2),sharesArray.getDouble(3),
                         sharesArray.getString(4),sharesArray.getDouble(5),sharesArray.getDouble(6),
-                        sharesArray.getDouble(7), sharesArray.getDouble(8),sharesArray.getString(9));
+                        sharesArray.getDouble(7), sharesArray.getDouble(8),sharesArray.getString(9),code);
                 shareEntities.add(share);
             }
             shares.setHq(shareEntities);
@@ -70,8 +75,18 @@ public class SharesUtil {
                     statArray.getDouble(5),statArray.getDouble(6),statArray.getDouble(7),
                     statArray.getString(8));
             shares.setStat(shareStat);
+            shares.setCodeName(getCodeName(code));
         }
         return shares;
+    }
+
+    private String getCodeName(String code){
+        String getUserNameUrl = "http://hq.sinajs.cn/list=sh@code";
+        getUserNameUrl = getUserNameUrl.replace("@code",code);
+        String result = UrlUtils.sendGet(getUserNameUrl,charset);
+        String codeName = result.split(",")[0];
+        codeName = codeName.replace("var hq_str_sh"+code+"=\"" ,"");
+        return codeName;
     }
 
 
