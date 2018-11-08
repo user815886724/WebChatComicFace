@@ -76,4 +76,15 @@ public class SharesController {
     public long getShareCount(String id){
         return sharesService.getShareCount(id);
     }
+
+
+    @GetMapping("/getChartOption")
+    @ResponseBody
+    public CallbackResult getChartOption(String id,@RequestParam(name = "startTime",required = false)String startTime,
+                                         @RequestParam(name = "endTime",required = false)String endTime){
+        CallbackResult callbackResult = new CallbackResult(false);
+        callbackResult.setDetails(sharesService.getChartData(id,startTime,endTime));
+        callbackResult.setSuccess(true);
+        return callbackResult;
+    }
 }

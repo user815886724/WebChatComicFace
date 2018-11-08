@@ -23,4 +23,5 @@ public interface SharesDao extends JpaRepository<Shares,String> {
             "AND (code = :code OR :code IS NULL )" +
             "AND  (code_name LIKE CONCAT('%',:codeName,'%') OR :codeName IS NULL )",nativeQuery = true)
     long getCountByCodeOrCodeName(@Param("code") String code,@Param("codeName") String codeName);
+
 }

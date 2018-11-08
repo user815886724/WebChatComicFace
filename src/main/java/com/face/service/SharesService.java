@@ -7,6 +7,7 @@ import com.face.model.SharesModel;
 import org.springframework.data.domain.Pageable;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,4 +30,6 @@ public interface SharesService {
     PageInfo<Share> getShareList(Pageable pageable,String id);
 
     long getShareCount(String id);
+
+    Map<String,List<String>> getChartData(String id,String startTime,String endTime);
 }

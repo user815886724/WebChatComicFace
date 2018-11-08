@@ -142,6 +142,50 @@ public class SharesServiceImpl implements SharesService {
         return shareDao.count(example);
     }
 
+
+    @Override
+    public Map<String, List<String>> getChartData(String id, String startTime, String endTime) {
+        List<Share> shareList = shareDao.queryAllBySharesIdOrOrderByTime(id);
+
+        List<String> times = new ArrayList<>();
+        List<String> openPrices = new ArrayList<>();
+        List<String> closePrices = new ArrayList<>();
+        List<String> riseFallAmounts = new ArrayList<>();
+        List<String> riseFallRanges = new ArrayList<>();
+        List<String> lowests = new ArrayList<>();
+        List<String> highests = new ArrayList<>();
+        List<String> volumes = new ArrayList<>();
+        List<String> turnovers = new ArrayList<>();
+        List<String> turnoverRates = new ArrayList<>();
+
+        for(Share share : shareList){
+            times.add(share.getTime());
+            openPrices.add(share.getOpenPrice().toString());
+            closePrices.add(share.getClosePrice().toString());
+            riseFallAmounts.add(share.getRiseFallAmount().toString());
+            riseFallRanges.add(share.getRiseFallRange().replace("%",""));
+            lowests.add(share.getLowest().toString());
+            highests.add(share.getHighest().toString());
+            volumes.add(share.getVolume().toString());
+            turnovers.add(share.getTurnover().toString());
+            turnoverRates.add(share.getTurnoverRate().replace("%",""));
+        }
+
+        Map<String,List<String>> map = new HashMap<>();
+        map.put("times",times);
+        map.put("openPrices",openPrices);
+        map.put("closePrices",closePrices);
+        map.put("riseFallAmounts",riseFallAmounts);
+        map.put("riseFallRanges",riseFallRanges);
+        map.put("lowests",lowests);
+        map.put("highests",highests);
+        map.put("volumes",volumes);
+        map.put("turnovers",turnovers);
+        map.put("turnoverRates",turnoverRates);
+
+        return map;
+    }
+
     //分割提取已有的日期
     private List<String> extractDate(List<String> times,String start,String end)throws ParseException{
         List<String> resultTime = new ArrayList<>();
