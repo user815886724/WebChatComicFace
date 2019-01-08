@@ -32,13 +32,18 @@
             border-top: 1px solid #eee;
             margin: 30px;
         }
+        .title{
+            color: rgb(51, 51, 51);;
+            font-size : 22px;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="site-title">
         <fieldset>
             <legend>
-                <a name="use">股票详情</a>
+                <a name="use"><span id="title"></span>股票详情</a>
             </legend>
         </fieldset>
     </div>
@@ -79,7 +84,33 @@
         </div>
     </div>
     <div class="site-text site-block">
-        <table class="layui-table" style="margin: 2px">
+        <span class="title">累计统计：</span>
+        <table id="statTable" class="layui-table" style="margin: 2px">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>时间段</th>
+                <th>股票编号</th>
+                <th>股票名称</th>
+                <th>累计涨幅额度</th>
+                <th>累计涨幅率</th>
+                <th>最低价</th>
+                <th>最高价</th>
+                <th>累计总交易量</th>
+                <th>累计交易额</th>
+                <th>累计换手率</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="site-text site-block">
+        <span class="title">数据详情：</span>
+        <table id="sharesTable" class="layui-table" style="margin: 2px">
             <colgroup>
                 <col width="150">
                 <col width="200">

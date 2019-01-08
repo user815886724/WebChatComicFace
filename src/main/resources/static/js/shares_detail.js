@@ -29,6 +29,7 @@ function init(){
             renderLaypage(curr,size);
         }
     })
+    initStatTable();
     initCharts();
 }
 
@@ -45,7 +46,7 @@ function initTable(curr,size) {
             size : size
         },
         success : function (resp) {
-            $(".layui-table tbody").html("");
+            $("#sharesTable tbody").html("");
             count = resp.total;
             if(resp.numberOfElements > 0){
                 $(resp.datas).each(function (i,item) {
@@ -61,12 +62,41 @@ function initTable(curr,size) {
                         "<td>"+item.turnover+"</td>" +
                         "<td>"+item.turnoverRate+"</td>" +
                         "</tr>";
-                    $(".layui-table tbody").append(html);
+                    $("#sharesTable tbody").append(html);
                 })
             }
         }
     })
 }
+
+function initStatTable() {
+    $.ajax({
+        url : "/shares/getShareInfo",
+        type : "GET",
+        dataType:"JSON",
+        data : {
+            id : getUrlParam("id")
+        },
+        success : function (resp) {
+            $("#title").html(resp.details.name + "("+resp.details.code.replace('cn_','')+")");
+            var html = "<tr>" +
+                "<td>"+resp.details.stat.timeDesc+"</td>" +
+                "<td>"+resp.details.code.replace('cn_','')+"</td>" +
+                "<td>"+resp.details.name+"</td>" +
+                "<td>"+resp.details.stat.riseFallAmountCount+"</td>" +
+                "<td>"+resp.details.stat.riseFallRangeCount+"</td>" +
+                "<td>"+resp.details.stat.lowest+"</td>" +
+                "<td>"+resp.details.stat.highest+"</td>" +
+                "<td>"+resp.details.stat.volumeCount+"</td>" +
+                "<td>"+resp.details.stat.turnoverCount+"</td>" +
+                "<td>"+resp.details.stat.turnoverRateCount+"</td>" +
+                "</tr>";
+            $("#statTable tbody").html(html);
+        }
+    })
+}
+
+
 function renderLaypage(curr,size){
     layui.use('laypage', function(){
         var laypage = layui.laypage;//高版本建议把括号去掉，有的低版本，需要加()

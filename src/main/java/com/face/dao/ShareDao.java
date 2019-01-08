@@ -19,4 +19,6 @@ public interface ShareDao extends JpaRepository<Share,String> {
 
     @Query(value = "SELECT * FROM share WHERE SHARES_ID = :id ORDER BY TIME ASC",nativeQuery = true)
     List<Share> queryAllBySharesIdOrOrderByTime(@Param("id") String id);
+
+
 }

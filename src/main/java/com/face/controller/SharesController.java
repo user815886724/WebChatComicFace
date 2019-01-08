@@ -87,4 +87,16 @@ public class SharesController {
         callbackResult.setSuccess(true);
         return callbackResult;
     }
+
+
+    @GetMapping("/getShareInfo")
+    @ResponseBody
+    public CallbackResult getShareInfo(String id){
+        CallbackResult callbackResult = new CallbackResult();
+        callbackResult.setDetails(sharesService.getSharesInfo(id));
+        callbackResult.setSuccess(true);
+        return callbackResult;
+    }
+
+
 }

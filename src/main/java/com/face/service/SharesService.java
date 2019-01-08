@@ -32,4 +32,8 @@ public interface SharesService {
     long getShareCount(String id);
 
     Map<String,List<String>> getChartData(String id,String startTime,String endTime);
+
+    Map<String,Object> getSharesInfo(String id);
+
+    List<Shares> getAllShares();
 }

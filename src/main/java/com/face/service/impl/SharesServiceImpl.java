@@ -14,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.GeneratedValue;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -186,6 +185,16 @@ public class SharesServiceImpl implements SharesService {
         return map;
     }
 
+    @Override
+    public Map<String, Object> getSharesInfo(String id) {
+        Shares shares = sharesDao.findById(id).get();
+        Map<String,Object> param = new HashMap<>();
+        param.put("name",shares.getCodeName());
+        param.put("code",shares.getCode());
+        param.put("stat",shares.getStat());
+        return param;
+    }
+
     //分割提取已有的日期
     private List<String> extractDate(List<String> times,String start,String end)throws ParseException{
         List<String> resultTime = new ArrayList<>();
@@ -232,5 +241,8 @@ public class SharesServiceImpl implements SharesService {
         return dateList;
     }
 
-
+    @Override
+    public List<Shares> getAllShares() {
+        return sharesDao.findAll();
+    }
 }
